@@ -1,0 +1,138 @@
+[
+  {
+    "name": "Melt Hutao",
+    "description": "Team focused on Melt reaction with Hutao as the main DPS.",
+    "verify_by": "superadmin",
+    "verify_status": "diterima",
+    "team_characters": [
+      {
+        "character_id": 1,
+        "artifact_id": 1,
+        "type_set": "4Set",
+        "mechanism": "Main DPS, uses charged attacks for high damage"
+      },
+      {
+        "character_id": 2,
+        "artifact_id": 2,
+        "type_set": "2Set",
+        "mechanism": "Supports with cryo application for melt reaction"
+      },
+      {
+        "character_id": 3,
+        "artifact_id": 3,
+        "type_set": "4Set",
+        "mechanism": "Provides hydro application for melt reaction"
+      }
+    ]
+  },
+  {
+    "name": "Electro Charge Beidou",
+    "description": "Team focused on Electro-Charged reaction with Beidou as the main DPS.",
+    "verify_by": "superadmin",
+    "verify_status": "diterima",
+    "team_characters": [
+      {
+        "character_id": 4,
+        "artifact_id": 4,
+        "type_set": "4Set",
+        "mechanism": "Main DPS, uses burst for high damage"
+      },
+      {
+        "character_id": 5,
+        "artifact_id": 5,
+        "type_set": "2Set",
+        "mechanism": "Provides off-field electro application"
+      },
+      {
+        "character_id": 6,
+        "artifact_id": 3,
+        "type_set": "4Set",
+        "mechanism": "Provides hydro application for electro-charged reaction"
+      },
+      {
+        "character_id": 7,
+        "artifact_id": 6,
+        "type_set": "2Set",
+        "mechanism": "Provides healing and attack boost"
+      }
+    ]
+  },
+  {
+    "name": "Freeze Ganyu",
+    "description": "Team focused on Freeze reaction with Ganyu as the main DPS.",
+    "verify_by": "superadmin",
+    "verify_status": "diterima",
+    "team_characters": [
+      {
+        "character_id": 8,
+        "artifact_id": 7,
+        "type_set": "4Set",
+        "mechanism": "Main DPS, uses charged attacks for high damage"
+      },
+      {
+        "character_id": 9,
+        "artifact_id": 8,
+        "type_set": "2Set",
+        "mechanism": "Provides hydro application for freeze reaction"
+      },
+      {
+        "character_id": 10,
+        "artifact_id": 9,
+        "type_set": "4Set",
+        "mechanism": "Provides cryo application and healing"
+      }
+    ]
+  },
+  {
+    "name": "Overload Diluc",
+    "description": "Team focused on Overload reaction with Diluc as the main DPS.",
+    "verify_by": "superadmin",
+    "verify_status": "diterima",
+    "team_characters": [
+      {
+        "character_id": 11,
+        "artifact_id": 10,
+        "type_set": "4Set",
+        "mechanism": "Main DPS, uses elemental skills for high damage"
+      },
+      {
+        "character_id": 12,
+        "artifact_id": 5,
+        "type_set": "2Set",
+        "mechanism": "Provides off-field electro application"
+      },
+      {
+        "character_id": 13,
+        "artifact_id": 11,
+        "type_set": "4Set",
+        "mechanism": "Provides pyro application for overload reaction"
+      }
+    ]
+  },
+  {
+    "name": "Vaporize Hu Tao",
+    "description": "Team focused on Vaporize reaction with Hu Tao as the main DPS.",
+    "verify_by": "superadmin",
+    "verify_status": "diterima",
+    "team_characters": [
+      {
+        "character_id": 1,
+        "artifact_id": 1,
+        "type_set": "4Set",
+        "mechanism": "Main DPS, uses charged attacks for high damage"
+      },
+      {
+        "character_id": 14,
+        "artifact_id": 3,
+        "type_set": "4Set",
+        "mechanism": "Provides hydro application for vaporize reaction"
+      },
+      {
+        "character_id": 15,
+        "artifact_id": 12,
+        "type_set": "2Set",
+        "mechanism": "Provides shield and crowd control"
+      }
+    ]
+  }
+]

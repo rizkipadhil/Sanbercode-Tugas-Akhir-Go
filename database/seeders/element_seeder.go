@@ -7,7 +7,7 @@ import (
 )
 
 func SeedElements() {
-		var count int64
+	var count int64
     database.DB.Model(&models.Element{}).Count(&count)
     if count > 0 {
         log.Println("Seeder sudah dijalankan sebelumnya.")
