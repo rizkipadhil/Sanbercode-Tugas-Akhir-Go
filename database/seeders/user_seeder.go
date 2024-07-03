@@ -8,7 +8,6 @@ import (
 )
 
 func SeedUsers() {
-    // Cek apakah sudah ada user di database
     var count int64
     database.DB.Model(&models.User{}).Count(&count)
     if count > 0 {

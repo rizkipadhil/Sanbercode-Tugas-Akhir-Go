@@ -3,9 +3,16 @@ package seeders
 import (
     "tugas-akhir/database"
     "tugas-akhir/models"
+    "log"
 )
 
 func SeedElements() {
+		var count int64
+    database.DB.Model(&models.Element{}).Count(&count)
+    if count > 0 {
+        log.Println("Seeder sudah dijalankan sebelumnya.")
+        return
+    }
     elements := []models.Element{
         {Name: "Pyro", CreatedBy: "seeder"},
         {Name: "Hydro", CreatedBy: "seeder"},

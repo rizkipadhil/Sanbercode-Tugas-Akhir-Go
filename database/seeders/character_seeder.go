@@ -9,19 +9,22 @@ import (
 )
 
 func SeedCharacters() {
-    // Baca file JSON
+		var count int64
+    database.DB.Model(&models.Character{}).Count(&count)
+    if count > 0 {
+        log.Println("Seeder sudah dijalankan sebelumnya.")
+        return
+    }
     file, err := ioutil.ReadFile("data/characters.json")
     if err != nil {
         log.Fatalf("Failed to read characters.json file: %v", err)
     }
 
-    // Parse JSON
     var characters []models.Character
     if err := json.Unmarshal(file, &characters); err != nil {
         log.Fatalf("Failed to parse characters.json file: %v", err)
     }
 
-    // Insert ke database
     for _, character := range characters {
         if result := database.DB.Create(&character); result.Error != nil {
             log.Printf("Failed to insert character %s: %v", character.Name, result.Error)
