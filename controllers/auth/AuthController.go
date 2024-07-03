@@ -16,7 +16,6 @@ func sendResponse(c *gin.Context, statusCode int, err bool, message string, data
     c.JSON(statusCode, gin.H{"error": err, "message": message, "data": data})
 }
 
-// ValidateUser validates the user struct
 func ValidateUser(user *models.User) (bool, string) {
     if user.Username == "" {
         return false, "Username is required"

@@ -24,7 +24,6 @@ func validateArtifact(artifact models.Artifact) []string {
     return errors
 }
 
-// CreateArtifact handles the creation of a new artifact
 func CreateArtifact(c *gin.Context) {
     var artifact models.Artifact
     if err := c.ShouldBindJSON(&artifact); err != nil {
@@ -44,7 +43,6 @@ func CreateArtifact(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{"error": false, "message": "Artifact created successfully"})
 }
 
-// GetArtifact handles fetching a single artifact by ID
 func GetArtifact(c *gin.Context) {
     id := c.Param("id")
     var artifact models.Artifact
@@ -55,14 +53,12 @@ func GetArtifact(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{"error": false, "data": artifact})
 }
 
-// GetArtifacts handles fetching all artifacts
 func GetArtifacts(c *gin.Context) {
     var artifacts []models.Artifact
     database.DB.Find(&artifacts)
     c.JSON(http.StatusOK, gin.H{"error": false, "data": artifacts})
 }
 
-// UpdateArtifact handles updating an artifact
 func UpdateArtifact(c *gin.Context) {
     id := c.Param("id")
     var artifact models.Artifact
@@ -88,7 +84,6 @@ func UpdateArtifact(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{"error": false, "message": "Artifact updated successfully"})
 }
 
-// DeleteArtifact handles deleting an artifact
 func DeleteArtifact(c *gin.Context) {
     id := c.Param("id")
     var artifact models.Artifact

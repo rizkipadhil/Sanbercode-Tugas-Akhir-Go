@@ -16,6 +16,8 @@ func SetupRouter() *gin.Engine {
     WeaponRoutes(router)
     ArtifactRoutes(router)
     CharacterRoutes(router)
+    TeamRoutes(router)
+    TeamCharacterRoutes(router)
 
     return router
 }

@@ -1,15 +1,19 @@
 package models
 
-import "time"
+import (
+    "time"
+)
 
 type Team struct {
-    ID           uint      `gorm:"primaryKey"`
-    Name         string
-    Description  string
-    VerifyBy     uint      `gorm:"default:null"` // ID of the user who verified the team
-    VerifyStatus string    // Values: "diterima", "ditolak"
-    CreatedAt    time.Time
-    UpdatedAt    time.Time
-    CreatedBy    string
-    UpdatedBy    string
+    ID             uint            `gorm:"primary_key"`
+    Name           string          `json:"name"`
+    Description    string          `json:"description"`
+    VerifyBy       string          `json:"verify_by"`
+    VerifyStatus   string          `json:"verify_status"` // diterima, ditolak, pending
+    CreatedAt      time.Time       `json:"created_at"`
+    UpdatedAt      time.Time       `json:"updated_at"`
+    CreatedBy      string          `json:"created_by"`
+    UpdatedBy      string          `json:"updated_by"`
+
+    TeamCharacters []TeamCharacter `json:"team_characters" gorm:"foreignkey:TeamID;constraint:OnDelete:CASCADE;"`
 }

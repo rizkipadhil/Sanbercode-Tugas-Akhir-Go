@@ -31,8 +31,6 @@ Aplikasi ini dirancang untuk membantu pemain Genshin Impact dalam menyusun tim y
 - `element_id`: Integer (Foreign Key ke Elements)
 - `weapon_id`: Integer (Foreign  Key ke Weapons)
 - `rarity`: Integer (Kelangkaan)
-- `base_stats`: JSON (Statistik dasar)
-- `talents`: JSON (Bakat)
 - `created_at`: DateTime (Waktu pembuatan)
 - `updated_at`: DateTime (Waktu pembaruan)
 - `created_by`: String (Pembuat)
