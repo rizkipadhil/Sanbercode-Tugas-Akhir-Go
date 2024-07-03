@@ -10,67 +10,91 @@ import (
     "os"
     "time"
     "strings"
-    "github.com/go-playground/validator/v10"
 )
 
-// Validator instance
-var validate = validator.New()
-
-// Helper function to send JSON responses
 func sendResponse(c *gin.Context, statusCode int, err bool, message string, data interface{}) {
     c.JSON(statusCode, gin.H{"error": err, "message": message, "data": data})
 }
 
-// Register handles new user registration
+// ValidateUser validates the user struct
+func ValidateUser(user *models.User) (bool, string) {
+    if user.Username == "" {
+        return false, "Username is required"
+    }
+    if user.Email == "" || !strings.Contains(user.Email, "@") {
+        return false, "Valid email is required"
+    }
+    if user.Password == "" {
+        return false, "Password is required"
+    }
+    return true, ""
+}
+
 func Register(c *gin.Context) {
     var user models.User
-    if err := c.ShouldBindJSON(&user); err != nil {
+    var userInput struct {
+        models.User
+        PasswordConfirmation string `json:"password_confirmation"`
+    }
+
+    if err := c.ShouldBindJSON(&userInput); err != nil {
         sendResponse(c, http.StatusBadRequest, true, "Invalid data", nil)
         return
     }
 
-    // Validate input
-    err := validate.Struct(user)
-    if err != nil {
-        sendResponse(c, http.StatusBadRequest, true, "Validation failed", gin.H{"errors": err.Error()})
+    user = userInput.User
+
+    isValid, validationError := ValidateUser(&user)
+    if !isValid {
+        sendResponse(c, http.StatusBadRequest, true, validationError, nil)
         return
     }
 
-    if user.Role != "member" {
-        sendResponse(c, http.StatusBadRequest, true, "Only 'member' role can be registered", nil)
+    if len(user.Password) < 6 {
+        sendResponse(c, http.StatusBadRequest, true, "Password must be at least 6 characters long", nil)
+        return
+    }
+
+    if user.Password != userInput.PasswordConfirmation {
+        sendResponse(c, http.StatusBadRequest, true, "Password confirmation does not match", nil)
+        return
+    }
+
+    var existingUser models.User
+    if err := database.DB.Where("username = ? OR email = ?", user.Username, user.Email).First(&existingUser).Error; err == nil {
+        sendResponse(c, http.StatusBadRequest, true, "Username or email already registered", nil)
         return
     }
 
     hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
     if err != nil {
-        sendResponse(c, http.StatusInternalServerError, true, "Password hashing failed", nil)
+        sendResponse(c, http.StatusInternalServerError, true, "Failed to hash password", nil)
         return
     }
     user.Password = string(hashedPassword)
-    user.Role = "member" // Set role to member by default
+    user.Role = "member"
 
     if result := database.DB.Create(&user); result.Error != nil {
         sendResponse(c, http.StatusInternalServerError, true, "Registration failed", nil)
         return
     }
 
-    sendResponse(c, http.StatusOK, false, "Registration successful", nil)
+    sendResponse(c, http.StatusOK, false, "Registration successful", gin.H{"username": user.Username, "email": user.Email})
 }
 
+// Login handles user login
 func Login(c *gin.Context) {
     var loginParams struct {
-        Username string `json:"username" validate:"required"`
-        Password string `json:"password" validate:"required"`
+        Username string `json:"username"`
+        Password string `json:"password"`
     }
     if err := c.ShouldBindJSON(&loginParams); err != nil {
         sendResponse(c, http.StatusBadRequest, true, "Invalid request data", nil)
         return
     }
 
-    // Validate input
-    err := validate.Struct(loginParams)
-    if err != nil {
-        sendResponse(c, http.StatusBadRequest, true, "Validation failed", gin.H{"errors": err.Error()})
+    if loginParams.Username == "" || loginParams.Password == "" {
+        sendResponse(c, http.StatusBadRequest, true, "Username and password are required", nil)
         return
     }
 

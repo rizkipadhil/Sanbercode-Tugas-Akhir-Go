@@ -12,5 +12,10 @@ func SetupRouter() *gin.Engine {
     router.GET("/", controllers.Greeting)
     AuthRoutes(router)
 
+    ElementRoutes(router)
+    WeaponRoutes(router)
+    ArtifactRoutes(router)
+    CharacterRoutes(router)
+
     return router
 }
