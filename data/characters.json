@@ -1,0 +1,618 @@
+[
+    {
+        "name": "Albedo",
+        "element_id": 1,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Alhaitham",
+        "element_id": 2,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Aloy",
+        "element_id": 3,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Arlecchino",
+        "element_id": 4,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Ayaka",
+        "element_id": 3,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Ayato",
+        "element_id": 5,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Baizhu",
+        "element_id": 2,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Childe",
+        "element_id": 5,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Chiori",
+        "element_id": 1,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Clorinde",
+        "element_id": 6,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Cyno",
+        "element_id": 6,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Dehya",
+        "element_id": 4,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Diluc",
+        "element_id": 4,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Eula",
+        "element_id": 3,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Furina",
+        "element_id": 5,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Ganyu",
+        "element_id": 3,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Hu Tao",
+        "element_id": 4,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Itto",
+        "element_id": 1,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Jean",
+        "element_id": 7,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Kazuha",
+        "element_id": 7,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Keqing",
+        "element_id": 6,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Klee",
+        "element_id": 4,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Kokomi",
+        "element_id": 5,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Lyney",
+        "element_id": 4,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Mona",
+        "element_id": 5,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Nahida",
+        "element_id": 2,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Navia",
+        "element_id": 1,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Neuvillette",
+        "element_id": 5,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Nilou",
+        "element_id": 5,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Qiqi",
+        "element_id": 3,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Raiden",
+        "element_id": 6,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Shenhe",
+        "element_id": 3,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Sigewinne",
+        "element_id": 5,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Tighnari",
+        "element_id": 2,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Traveler (Anemo)",
+        "element_id": 7,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Traveler (Dendro)",
+        "element_id": 2,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Traveler (Electro)",
+        "element_id": 6,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Traveler (Geo)",
+        "element_id": 1,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Traveler (Hydro)",
+        "element_id": 5,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Venti",
+        "element_id": 7,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Wanderer",
+        "element_id": 7,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Wriothesley",
+        "element_id": 3,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Xianyun",
+        "element_id": 7,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Xiao",
+        "element_id": 7,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Yae Miko",
+        "element_id": 6,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Yelan",
+        "element_id": 5,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Yoimiya",
+        "element_id": 4,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Zhongli",
+        "element_id": 1,
+        "weapon_id": 4,
+        "rarity": 5,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Amber",
+        "element_id": 4,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Barbara",
+        "element_id": 5,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Beidou",
+        "element_id": 6,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Bennett",
+        "element_id": 4,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Candace",
+        "element_id": 5,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Charlotte",
+        "element_id": 3,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Chevreuse",
+        "element_id": 4,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Chongyun",
+        "element_id": 3,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Collei",
+        "element_id": 2,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Diona",
+        "element_id": 3,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Dori",
+        "element_id": 6,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Faruzan",
+        "element_id": 7,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Fischl",
+        "element_id": 6,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Freminet",
+        "element_id": 3,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Gaming",
+        "element_id": 4,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Gorou",
+        "element_id": 1,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Heizou",
+        "element_id": 7,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Kaeya",
+        "element_id": 3,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Kaveh",
+        "element_id": 2,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Kirara",
+        "element_id": 2,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Kuki Shinobu",
+        "element_id": 6,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Layla",
+        "element_id": 3,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Lisa",
+        "element_id": 6,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Lynette",
+        "element_id": 7,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Mika",
+        "element_id": 3,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Ningguang",
+        "element_id": 1,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Noelle",
+        "element_id": 1,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Razor",
+        "element_id": 6,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Rosaria",
+        "element_id": 3,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Sara",
+        "element_id": 6,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Sayu",
+        "element_id": 7,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Sethos",
+        "element_id": 6,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Sucrose",
+        "element_id": 7,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Thoma",
+        "element_id": 4,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Xiangling",
+        "element_id": 4,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Xingqiu",
+        "element_id": 5,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Xinyan",
+        "element_id": 4,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Yanfei",
+        "element_id": 4,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Yaoyao",
+        "element_id": 2,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    },
+    {
+        "name": "Yun Jin",
+        "element_id": 1,
+        "weapon_id": 4,
+        "rarity": 4,
+        "created_by": "seeder"
+    }
+]

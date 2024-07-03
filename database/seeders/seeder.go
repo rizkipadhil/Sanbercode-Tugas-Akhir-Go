@@ -5,4 +5,5 @@ func SeedAll() {
     SeedElements()
     SeedWeapons()
     SeedArtifacts()
+    SeedCharacters()
 }

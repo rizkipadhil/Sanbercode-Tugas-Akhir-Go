@@ -2,7 +2,6 @@ package controllers
 
 import (
     "net/http"
-    "strconv"
     "tugas-akhir/database"
     "tugas-akhir/models"
     "github.com/gin-gonic/gin"
@@ -47,7 +46,7 @@ func CreateCharacter(c *gin.Context) {
 func GetCharacter(c *gin.Context) {
     id := c.Param("id")
     var character models.Character
-    if result := database.DB.First(&character, id); result.Error != nil {
+    if result := database.DB.Preload("Element").Preload("Weapon").First(&character, id); result.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": true, "message": "Character not found"})
         return
     }
@@ -56,7 +55,7 @@ func GetCharacter(c *gin.Context) {
 
 func GetCharacters(c *gin.Context) {
     var characters []models.Character
-    database.DB.Find(&characters)
+    database.DB.Preload("Element").Preload("Weapon").Find(&characters)
     c.JSON(http.StatusOK, gin.H{"error": false, "data": characters})
 }
 
