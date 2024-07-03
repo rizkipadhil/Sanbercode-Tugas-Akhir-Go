@@ -108,7 +108,7 @@ func Login(c *gin.Context) {
         return
     }
 
-    token, err := GenerateJWT(user.ID, user.Role)
+    token, err := GenerateJWT(user.ID, user.Role, user.Username)
     if err != nil {
         sendResponse(c, http.StatusInternalServerError, true, "Failed to create token", nil)
         return
@@ -117,7 +117,7 @@ func Login(c *gin.Context) {
     sendResponse(c, http.StatusOK, false, "Login successful", gin.H{"token": token})
 }
 
-func GenerateJWT(userID uint, role string) (string, error) {
+func GenerateJWT(userID uint, role string, username string) (string, error) {
     var mySigningKey = []byte(os.Getenv("KEY_APP"))
     token := jwt.New(jwt.SigningMethodHS256)
     claims := token.Claims.(jwt.MapClaims)
@@ -125,6 +125,7 @@ func GenerateJWT(userID uint, role string) (string, error) {
     claims["authorized"] = true
     claims["user_id"] = userID
     claims["role"] = role
+    claims["username"] = username
     claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
 
     tokenString, err := token.SignedString(mySigningKey)
@@ -148,7 +149,7 @@ func RefreshToken(c *gin.Context) {
     }
 
     if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-        newToken, err := GenerateJWT(uint(claims["user_id"].(float64)), claims["role"].(string))
+        newToken, err := GenerateJWT(uint(claims["user_id"].(float64)), claims["role"].(string), claims["username"].(string))
         if err != nil {
             sendResponse(c, http.StatusInternalServerError, true, "Failed to create new token", nil)
             return

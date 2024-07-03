@@ -37,6 +37,7 @@ func AuthMiddleware() gin.HandlerFunc {
 
             c.Set("user_id", claims["user_id"])
             c.Set("role", claims["role"])
+            c.Set("username", claims["username"])
         } else {
             c.JSON(http.StatusUnauthorized, gin.H{"error": true, "message": "Invalid token", "details": err.Error()})
             c.Abort()

@@ -21,6 +21,9 @@ func CreateElement(c *gin.Context) {
         return
     }
 
+    userName, _ := c.Get("username")
+    element.CreatedBy = userName.(string)
+
     isValid, validationError := validateElement(&element)
     if !isValid {
         c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": validationError})
@@ -63,6 +66,9 @@ func UpdateElement(c *gin.Context) {
         c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": "Invalid data"})
         return
     }
+
+    userName, _ := c.Get("username")
+    element.UpdatedBy = userName.(string)
 
     isValid, validationError := validateElement(&element)
     if !isValid {

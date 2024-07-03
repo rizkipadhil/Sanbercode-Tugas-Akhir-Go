@@ -27,6 +27,9 @@ func CreateWeapon(c *gin.Context) {
         return
     }
 
+    userName, _ := c.Get("username")
+    weapon.CreatedBy = userName.(string)
+
     if result := database.DB.Create(&weapon); result.Error != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": true, "message": "Failed to create weapon"})
         return
@@ -70,6 +73,9 @@ func UpdateWeapon(c *gin.Context) {
         c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": validationError})
         return
     }
+
+    userName, _ := c.Get("username")
+    weapon.UpdatedBy = userName.(string)
 
     if result := database.DB.Model(&weapon).Where("id = ?", id).Updates(weapon); result.Error != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": true, "message": "Failed to update weapon"})

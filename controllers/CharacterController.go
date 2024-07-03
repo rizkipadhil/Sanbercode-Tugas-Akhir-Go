@@ -26,10 +26,13 @@ func validateCharacter(character models.Character) []string {
 
 func CreateCharacter(c *gin.Context) {
     var character models.Character
+    userName, _ := c.Get("username")
     if err := c.ShouldBindJSON(&character); err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": "Invalid data"})
         return
     }
+
+    character.CreatedBy = userName.(string)
 
     if validationErrors := validateCharacter(character); len(validationErrors) > 0 {
         c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": validationErrors})
@@ -62,6 +65,7 @@ func GetCharacters(c *gin.Context) {
 func UpdateCharacter(c *gin.Context) {
     id := c.Param("id")
     var character models.Character
+    userName, _ := c.Get("username")
     if result := database.DB.First(&character, id); result.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": true, "message": "Character not found"})
         return
@@ -71,6 +75,8 @@ func UpdateCharacter(c *gin.Context) {
         c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": "Invalid data"})
         return
     }
+
+    character.UpdatedBy = userName.(string)
 
     if validationErrors := validateCharacter(character); len(validationErrors) > 0 {
         c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": validationErrors})

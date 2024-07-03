@@ -36,6 +36,9 @@ func CreateArtifact(c *gin.Context) {
         return
     }
 
+		userName, _ := c.Get("username")
+		artifact.CreatedBy = userName.(string)
+
     if result := database.DB.Create(&artifact); result.Error != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": true, "message": "Creation failed"})
         return
@@ -76,6 +79,9 @@ func UpdateArtifact(c *gin.Context) {
         c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": validationErrors})
         return
     }
+
+		userName, _ := c.Get("username")
+		artifact.UpdatedBy = userName.(string)
 
     if result := database.DB.Save(&artifact); result.Error != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": true, "message": "Update failed"})

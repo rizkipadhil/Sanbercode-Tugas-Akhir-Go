@@ -34,6 +34,9 @@ func CreateTeamCharacter(c *gin.Context) {
         return
     }
 
+    userName, _ := c.Get("username")
+    teamCharacter.CreatedBy = userName.(string)
+
     if validationErrors := validateTeamCharacter(teamCharacter); len(validationErrors) > 0 {
         c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": validationErrors})
         return
@@ -70,6 +73,9 @@ func UpdateTeamCharacter(c *gin.Context) {
         return
     }
 
+    userName, _ := c.Get("username")
+    teamCharacter.UpdatedBy = userName.(string)
+
     if err := c.ShouldBindJSON(&teamCharacter); err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": "Invalid data"})
         return
@@ -94,8 +100,7 @@ func DeleteTeamCharacter(c *gin.Context) {
         c.JSON(http.StatusNotFound, gin.H{"error": true, "message": "Team character not found"})
         return
     }
-
-    if result := database.DB.Delete(&teamCharacter, id); result.Error != nil {
+    if result := database.DB.Delete(&teamCharacter); result.Error != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": true, "message": "Delete failed"})
         return
     }

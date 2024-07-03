@@ -66,6 +66,8 @@ func CreateTeam(c *gin.Context) {
         team.VerifyStatus = "pending"
     }
 
+    team.CreatedBy = userName.(string)
+
     tx := database.DB.Begin()
     if err := tx.Create(&team).Error; err != nil {
         tx.Rollback()
@@ -130,6 +132,9 @@ func UpdateTeam(c *gin.Context) {
         c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": validationErrors})
         return
     }
+
+    userName, _ := c.Get("username")
+    team.UpdatedBy = userName.(string)
 
     if result := database.DB.Save(&team); result.Error != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": true, "message": "Update failed"})
