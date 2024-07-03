@@ -111,7 +111,15 @@ func GetTeam(c *gin.Context) {
 
 func GetTeams(c *gin.Context) {
     var teams []models.Team
-    database.DB.Preload("TeamCharacters.Character").Preload("TeamCharacters.Artifact").Find(&teams)
+    userName, _ := c.Get("username")
+    userRole, _ := c.Get("role")
+
+    if userRole != "superadmin" {
+        database.DB.Preload("TeamCharacters.Character").Preload("TeamCharacters.Artifact").Where("created_by = ?", userName).Find(&teams)
+    } else {
+        database.DB.Preload("TeamCharacters.Character").Preload("TeamCharacters.Artifact").Find(&teams)
+    }
+
     c.JSON(http.StatusOK, gin.H{"error": false, "data": teams})
 }
 

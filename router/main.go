@@ -18,6 +18,7 @@ func SetupRouter() *gin.Engine {
     CharacterRoutes(router)
     TeamRoutes(router)
     TeamCharacterRoutes(router)
+    ActionRoutes(router)
 
     return router
 }

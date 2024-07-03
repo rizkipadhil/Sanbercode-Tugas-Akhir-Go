@@ -9,7 +9,7 @@ import (
 func CharacterRoutes(router *gin.Engine) {
     characterGroup := router.Group("/characters")
 
-    characterGroup.Use(middleware.AuthMiddleware())
+    characterGroup.Use(middleware.AuthMiddleware(), middleware.AdminMiddleware())
     {
         characterGroup.POST("/", controllers.CreateCharacter)
         characterGroup.GET("/", controllers.GetCharacters)

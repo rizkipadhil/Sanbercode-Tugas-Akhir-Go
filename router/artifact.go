@@ -9,7 +9,7 @@ import (
 func ArtifactRoutes(router *gin.Engine) {
     artifactGroup := router.Group("/artifacts")
 
-    artifactGroup.Use(middleware.AuthMiddleware())
+    artifactGroup.Use(middleware.AuthMiddleware(), middleware.AdminMiddleware())
     {
         artifactGroup.POST("/", controllers.CreateArtifact)
         artifactGroup.GET("/", controllers.GetArtifacts)

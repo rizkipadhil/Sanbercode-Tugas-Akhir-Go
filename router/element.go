@@ -9,7 +9,7 @@ import (
 func ElementRoutes(router *gin.Engine) {
     elementGroup := router.Group("/elements")
 
-    elementGroup.Use(middleware.AuthMiddleware())
+    elementGroup.Use(middleware.AuthMiddleware(), middleware.AdminMiddleware())
     {
         elementGroup.POST("/", controllers.CreateElement)
         elementGroup.GET("/", controllers.GetElements)

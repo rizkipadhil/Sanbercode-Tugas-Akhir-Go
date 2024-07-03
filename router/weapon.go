@@ -9,7 +9,7 @@ import (
 func WeaponRoutes(router *gin.Engine) {
     weaponGroup := router.Group("/weapons")
 
-    weaponGroup.Use(middleware.AuthMiddleware())
+    weaponGroup.Use(middleware.AuthMiddleware(), middleware.AdminMiddleware())
     {
         weaponGroup.POST("/", controllers.CreateWeapon)
         weaponGroup.GET("/", controllers.GetWeapons)
