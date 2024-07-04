@@ -102,7 +102,7 @@ func CreateTeam(c *gin.Context) {
 func GetTeam(c *gin.Context) {
     id := c.Param("id")
     var team models.Team
-    if result := database.DB.Preload("TeamCharacters.Character").Preload("TeamCharacters.Artifact").First(&team, id); result.Error != nil {
+    if result := database.DB.Preload("TeamCharacters.Character").Preload("TeamCharacters.Character.Weapon").Preload("TeamCharacters.Character.Element").Preload("TeamCharacters.Artifact").First(&team, id); result.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": true, "message": "Team not found"})
         return
     }

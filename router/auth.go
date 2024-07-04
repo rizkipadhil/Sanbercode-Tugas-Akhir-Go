@@ -16,5 +16,6 @@ func AuthRoutes(router *gin.Engine) {
         authGroup.POST("/refresh_token", auth.RefreshToken)
         authGroup.POST("/logout", auth.Logout)
         authGroup.GET("/user", auth.UserAuth)
+        authGroup.POST("/change_password", auth.ChangePassword)
     }
 }

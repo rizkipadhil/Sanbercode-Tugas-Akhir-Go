@@ -194,3 +194,57 @@ func UserAuth(c *gin.Context) {
         "updated_at": user.UpdatedAt,
     }})
 }
+
+func ChangePassword(c *gin.Context) {
+    userID, exists := c.Get("user_id")
+    if !exists {
+        sendResponse(c, http.StatusUnauthorized, true, "User not authenticated", nil)
+        return
+    }
+
+    var request struct {
+        OldPassword        string `json:"old_password"`
+        NewPassword        string `json:"new_password"`
+        ConfirmNewPassword string `json:"confirm_new_password"`
+    }
+
+    if err := c.ShouldBindJSON(&request); err != nil {
+        sendResponse(c, http.StatusBadRequest, true, "Invalid request data", nil)
+        return
+    }
+
+    if request.OldPassword == "" || request.NewPassword == "" || request.ConfirmNewPassword == "" {
+        sendResponse(c, http.StatusBadRequest, true, "All fields are required", nil)
+        return
+    }
+
+    if request.NewPassword != request.ConfirmNewPassword {
+        sendResponse(c, http.StatusBadRequest, true, "New password and confirmation do not match", nil)
+        return
+    }
+
+    var user models.User
+    if result := database.DB.First(&user, userID); result.Error != nil {
+        sendResponse(c, http.StatusInternalServerError, true, "User not found", nil)
+        return
+    }
+
+    if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(request.OldPassword)); err != nil {
+        sendResponse(c, http.StatusUnauthorized, true, "Old password is incorrect", nil)
+        return
+    }
+
+    hashedPassword, err := bcrypt.GenerateFromPassword([]byte(request.NewPassword), bcrypt.DefaultCost)
+    if err != nil {
+        sendResponse(c, http.StatusInternalServerError, true, "Failed to hash new password", nil)
+        return
+    }
+
+    user.Password = string(hashedPassword)
+    if result := database.DB.Save(&user); result.Error != nil {
+        sendResponse(c, http.StatusInternalServerError, true, "Failed to update password", nil)
+        return
+    }
+
+    sendResponse(c, http.StatusOK, false, "Password changed successfully", nil)
+}
