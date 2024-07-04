@@ -34,7 +34,18 @@ func CreateTeamCharacter(c *gin.Context) {
         return
     }
 
+    var team models.Team
+    if result := database.DB.First(&team, teamCharacter.TeamID); result.Error != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": true, "message": "Team not found"})
+        return
+    }
+
     userName, _ := c.Get("username")
+    if team.CreatedBy != userName && userName != "superadmin" {
+        c.JSON(http.StatusUnauthorized, gin.H{"error": true, "message": "You are not authorized to update this team character"})
+        return
+    }
+
     teamCharacter.CreatedBy = userName.(string)
 
     if validationErrors := validateTeamCharacter(teamCharacter); len(validationErrors) > 0 {
@@ -75,25 +86,9 @@ func GetTeamCharacters(c *gin.Context) {
 
 func UpdateTeamCharacter(c *gin.Context) {
     id := c.Param("id")
-    var teamCharacter models.TeamCharacter
-    if result := database.DB.First(&teamCharacter, id); result.Error != nil {
-        c.JSON(http.StatusNotFound, gin.H{"error": true, "message": "Team character not found"})
-        return
-    }
-
-    var team models.Team
-    if result := database.DB.First(&team, teamCharacter.TeamID); result.Error != nil {
-        c.JSON(http.StatusInternalServerError, gin.H{"error": true, "message": "Team not found"})
-        return
-    }
-
-    userName, _ := c.Get("username")
-    if team.CreatedBy != userName {
-        c.JSON(http.StatusUnauthorized, gin.H{"error": true, "message": "You are not authorized to update this team character"})
-        return
-    }
 
     var teamCharacterUpdate struct {
+        TeamID      uint   `json:"team_id"`
         CharacterID uint   `json:"character_id"`
         ArtifactID  uint   `json:"artifact_id"`
         TypeSet     string `json:"type_set"`
@@ -104,7 +99,33 @@ func UpdateTeamCharacter(c *gin.Context) {
         c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": "Invalid data"})
         return
     }
+
+    var teamCharacter models.TeamCharacter
+    if result := database.DB.First(&teamCharacter, id); result.Error != nil {
+        c.JSON(http.StatusNotFound, gin.H{"error": true, "message": "Team character not found"})
+        return
+    }
+
+    var teamUpdate models.Team
+    if result := database.DB.First(&teamUpdate, teamCharacterUpdate.TeamID); result.Error != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": true, "message": "Team not found"})
+        return
+    }
+
+    var teamCurrent models.Team
+    if result := database.DB.First(&teamCurrent, teamCharacter.TeamID); result.Error != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": true, "message": "Team not found"})
+        return
+    }
+
+    userName, _ := c.Get("username")
+    if (teamUpdate.CreatedBy != userName && userName != "superadmin") || (teamCurrent.CreatedBy != userName && userName != "superadmin") {
+        c.JSON(http.StatusUnauthorized, gin.H{"error": true, "message": "You are not authorized to update this team character"})
+        return
+    }
+
     if validationErrors := validateTeamCharacter(models.TeamCharacter{
+        TeamID:      teamCharacterUpdate.TeamID,
         CharacterID: teamCharacterUpdate.CharacterID,
         ArtifactID:  teamCharacterUpdate.ArtifactID,
         TypeSet:     teamCharacterUpdate.TypeSet,
@@ -118,7 +139,15 @@ func UpdateTeamCharacter(c *gin.Context) {
     teamCharacter.ArtifactID = teamCharacterUpdate.ArtifactID
     teamCharacter.TypeSet = teamCharacterUpdate.TypeSet
     teamCharacter.Mechanism = teamCharacterUpdate.Mechanism
-  
+    teamCharacter.UpdatedBy = userName.(string)
+
+    if result := database.DB.Save(&teamCharacter); result.Error != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": true, "message": "Update failed"})
+        return
+    }
+
+    c.JSON(http.StatusOK, gin.H{"error": false, "message": "Team character updated successfully"})
+}
 
 func DeleteTeamCharacter(c *gin.Context) {
     id := c.Param("id")
@@ -135,7 +164,7 @@ func DeleteTeamCharacter(c *gin.Context) {
     }
 
     userName, _ := c.Get("username")
-    if team.CreatedBy != userName {
+    if team.CreatedBy != userName && userName != "superadmin" {
         c.JSON(http.StatusUnauthorized, gin.H{"error": true, "message": "You are not authorized to delete this team character"})
         return
     }
