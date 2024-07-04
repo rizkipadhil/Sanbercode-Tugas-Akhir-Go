@@ -4,6 +4,6 @@ import "time"
 
 type OldToken struct {
     ID        uint      `gorm:"primaryKey"`
-    Token     string    `gorm:"unique"`
+    Token     string    `gorm:"type:text"`
     CreatedAt time.Time
 }

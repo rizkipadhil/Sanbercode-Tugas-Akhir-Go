@@ -21,6 +21,7 @@ func AuthMiddleware() gin.HandlerFunc {
         }
 
         tokenString := strings.TrimPrefix(authHeader, "Bearer ")
+
         token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
             return []byte(os.Getenv("KEY_APP")), nil
         })
@@ -31,6 +32,14 @@ func AuthMiddleware() gin.HandlerFunc {
                 oldToken := models.OldToken{Token: tokenString, CreatedAt: time.Now()}
                 database.DB.Create(&oldToken)
                 c.JSON(http.StatusUnauthorized, gin.H{"error": true, "message": "Token expired"})
+                c.Abort()
+                return
+            }
+
+            var oldTokens []models.OldToken
+            database.DB.Where("token = ?", tokenString).Find(&oldTokens)
+            if len(oldTokens) > 0 {
+                c.JSON(http.StatusUnauthorized, gin.H{"error": true, "message": "Invalid token"})
                 c.Abort()
                 return
             }
