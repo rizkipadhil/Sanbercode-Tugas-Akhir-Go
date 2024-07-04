@@ -131,6 +131,12 @@ func UpdateTeam(c *gin.Context) {
         return
     }
 
+    userName, _ := c.Get("username")
+    if team.CreatedBy != userName {
+        c.JSON(http.StatusUnauthorized, gin.H{"error": true, "message": "You are not authorized to update this team"})
+        return
+    }
+
     if err := c.ShouldBindJSON(&team); err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": "Invalid data"})
         return
@@ -141,7 +147,6 @@ func UpdateTeam(c *gin.Context) {
         return
     }
 
-    userName, _ := c.Get("username")
     team.UpdatedBy = userName.(string)
 
     if result := database.DB.Save(&team); result.Error != nil {
@@ -156,6 +161,12 @@ func DeleteTeam(c *gin.Context) {
     var team models.Team
     if result := database.DB.Preload("TeamCharacters").First(&team, id); result.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": true, "message": "Team not found"})
+        return
+    }
+
+    userName, _ := c.Get("username")
+    if team.CreatedBy != userName {
+        c.JSON(http.StatusUnauthorized, gin.H{"error": true, "message": "You are not authorized to delete this team"})
         return
     }
 

@@ -52,7 +52,7 @@ func CreateTeamCharacter(c *gin.Context) {
 func GetTeamCharacter(c *gin.Context) {
     id := c.Param("id")
     var teamCharacter models.TeamCharacter
-    if result := database.DB.Preload("Character").Preload("Artifact").Preload("Team").First(&teamCharacter, id); result.Error != nil {
+    if result := database.DB.Preload("Character").Preload("Artifact").First(&teamCharacter, id); result.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": true, "message": "Team character not found"})
         return
     }
@@ -65,9 +65,9 @@ func GetTeamCharacters(c *gin.Context) {
     username, _ := c.Get("username")
 
     if userRole == "superadmin" {
-        database.DB.Preload("Character").Preload("Artifact").Preload("Team").Find(&teamCharacters)
+        database.DB.Preload("Character").Preload("Artifact").Find(&teamCharacters)
     } else {
-        database.DB.Preload("Character").Preload("Artifact").Preload("Team").Joins("JOIN teams ON teams.id = team_characters.team_id").Where("teams.created_by = ?", username).Find(&teamCharacters)
+        database.DB.Preload("Character").Preload("Artifact").Joins("JOIN teams ON teams.id = team_characters.team_id").Where("teams.created_by = ?", username).Find(&teamCharacters)
     }
 
     c.JSON(http.StatusOK, gin.H{"error": false, "data": teamCharacters})
@@ -81,7 +81,18 @@ func UpdateTeamCharacter(c *gin.Context) {
         return
     }
 
+    var team models.Team
+    if result := database.DB.First(&team, teamCharacter.TeamID); result.Error != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": true, "message": "Team not found"})
+        return
+    }
+
     userName, _ := c.Get("username")
+    if team.CreatedBy != userName {
+        c.JSON(http.StatusUnauthorized, gin.H{"error": true, "message": "You are not authorized to update this team character"})
+        return
+    }
+
     teamCharacter.UpdatedBy = userName.(string)
 
     if err := c.ShouldBindJSON(&teamCharacter); err != nil {
@@ -108,6 +119,19 @@ func DeleteTeamCharacter(c *gin.Context) {
         c.JSON(http.StatusNotFound, gin.H{"error": true, "message": "Team character not found"})
         return
     }
+
+    var team models.Team
+    if result := database.DB.First(&team, teamCharacter.TeamID); result.Error != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": true, "message": "Team not found"})
+        return
+    }
+
+    userName, _ := c.Get("username")
+    if team.CreatedBy != userName {
+        c.JSON(http.StatusUnauthorized, gin.H{"error": true, "message": "You are not authorized to delete this team character"})
+        return
+    }
+
     if result := database.DB.Delete(&teamCharacter); result.Error != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": true, "message": "Delete failed"})
         return
