@@ -53,6 +53,8 @@ Aplikasi ini dirancang untuk membantu pemain Genshin Impact dalam menyusun tim y
 - `description`: String (Deskripsi tim)
 - `created_at`: DateTime (Waktu pembuatan)
 - `updated_at`: DateTime (Waktu pembaruan)
+- `verify_status`: String (Status verifikasi)
+- `verify_by`: String (Verifikasi oleh)
 - `created_by`: String (Pembuat)
 - `updated_by`: String (Pembaruan oleh)
 
