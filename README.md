@@ -5,6 +5,8 @@ Aplikasi ini dirancang untuk membantu pemain Genshin Impact dalam menyusun tim y
 
 ### Judul: Rekomendasi Tim Genshin Impact
 
+### Dokumentasi API: https://documenter.getpostman.com/view/813958/2sA3dxFCoa
+
 #### Elements [icon: zap, color: yellow]
 - `id`: Integer (Primary Key)
 - `name`: String (Nama elemen)
