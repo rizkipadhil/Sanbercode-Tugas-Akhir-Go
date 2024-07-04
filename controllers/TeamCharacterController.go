@@ -61,7 +61,15 @@ func GetTeamCharacter(c *gin.Context) {
 
 func GetTeamCharacters(c *gin.Context) {
     var teamCharacters []models.TeamCharacter
-    database.DB.Preload("Character").Preload("Artifact").Find(&teamCharacters)
+    userRole, _ := c.Get("role")
+    username, _ := c.Get("username")
+
+    if userRole == "superadmin" {
+        database.DB.Preload("Character").Preload("Artifact").Find(&teamCharacters)
+    } else {
+        database.DB.Preload("Character").Preload("Artifact").Joins("JOIN teams ON teams.id = team_characters.team_id").Where("teams.created_by = ?", username).Find(&teamCharacters)
+    }
+
     c.JSON(http.StatusOK, gin.H{"error": false, "data": teamCharacters})
 }
 
