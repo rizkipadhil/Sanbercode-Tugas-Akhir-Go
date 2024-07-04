@@ -81,7 +81,6 @@ func Register(c *gin.Context) {
     sendResponse(c, http.StatusOK, false, "Registration successful", gin.H{"username": user.Username, "email": user.Email})
 }
 
-// Login handles user login
 func Login(c *gin.Context) {
     var loginParams struct {
         Username string `json:"username"`
@@ -126,7 +125,7 @@ func GenerateJWT(userID uint, role string, username string) (string, error) {
     claims["user_id"] = userID
     claims["role"] = role
     claims["username"] = username
-    claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
+    claims["exp"] = time.Now().Add(time.Hour * 1).Unix()
 
     tokenString, err := token.SignedString(mySigningKey)
     if err != nil {
