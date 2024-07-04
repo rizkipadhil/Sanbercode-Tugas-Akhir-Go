@@ -52,7 +52,7 @@ func CreateTeamCharacter(c *gin.Context) {
 func GetTeamCharacter(c *gin.Context) {
     id := c.Param("id")
     var teamCharacter models.TeamCharacter
-    if result := database.DB.Preload("Character").Preload("Artifact").First(&teamCharacter, id); result.Error != nil {
+    if result := database.DB.Preload("Character").Preload("Artifact").Preload("Team").First(&teamCharacter, id); result.Error != nil {
         c.JSON(http.StatusNotFound, gin.H{"error": true, "message": "Team character not found"})
         return
     }
@@ -65,9 +65,9 @@ func GetTeamCharacters(c *gin.Context) {
     username, _ := c.Get("username")
 
     if userRole == "superadmin" {
-        database.DB.Preload("Character").Preload("Artifact").Find(&teamCharacters)
+        database.DB.Preload("Character").Preload("Artifact").Preload("Team").Find(&teamCharacters)
     } else {
-        database.DB.Preload("Character").Preload("Artifact").Joins("JOIN teams ON teams.id = team_characters.team_id").Where("teams.created_by = ?", username).Find(&teamCharacters)
+        database.DB.Preload("Character").Preload("Artifact").Preload("Team").Joins("JOIN teams ON teams.id = team_characters.team_id").Where("teams.created_by = ?", username).Find(&teamCharacters)
     }
 
     c.JSON(http.StatusOK, gin.H{"error": false, "data": teamCharacters})
