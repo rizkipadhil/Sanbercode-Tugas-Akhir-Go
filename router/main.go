@@ -10,6 +10,9 @@ func SetupRouter() *gin.Engine {
 
     // Public routes
     router.GET("/", controllers.Greeting)
+    // GetTeamsPublic
+    router.GET("/teams-public", controllers.GetTeamsPublic)
+
     AuthRoutes(router)
 
     ElementRoutes(router)

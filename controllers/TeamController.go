@@ -115,9 +115,9 @@ func GetTeams(c *gin.Context) {
     userRole, _ := c.Get("role")
 
     if userRole != "superadmin" {
-        database.DB.Preload("TeamCharacters.Character").Preload("TeamCharacters.Artifact").Where("created_by = ?", userName).Find(&teams)
+        database.DB.Preload("TeamCharacters.Character").Preload("TeamCharacters.Character.Weapon").Preload("TeamCharacters.Character.Element").Preload("TeamCharacters.Artifact").Where("created_by = ?", userName).Find(&teams)
     } else {
-        database.DB.Preload("TeamCharacters.Character").Preload("TeamCharacters.Artifact").Find(&teams)
+        database.DB.Preload("TeamCharacters.Character").Preload("TeamCharacters.Character.Weapon").Preload("TeamCharacters.Character.Element").Preload("TeamCharacters.Artifact").Find(&teams)
     }
 
     c.JSON(http.StatusOK, gin.H{"error": false, "data": teams})
