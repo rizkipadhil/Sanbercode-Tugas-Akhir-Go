@@ -93,24 +93,32 @@ func UpdateTeamCharacter(c *gin.Context) {
         return
     }
 
-    teamCharacter.UpdatedBy = userName.(string)
+    var teamCharacterUpdate struct {
+        CharacterID uint   `json:"character_id"`
+        ArtifactID  uint   `json:"artifact_id"`
+        TypeSet     string `json:"type_set"`
+        Mechanism   string `json:"mechanism"`
+    }
 
-    if err := c.ShouldBindJSON(&teamCharacter); err != nil {
+    if err := c.ShouldBindJSON(&teamCharacterUpdate); err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": "Invalid data"})
         return
     }
-
-    if validationErrors := validateTeamCharacter(teamCharacter); len(validationErrors) > 0 {
+    if validationErrors := validateTeamCharacter(models.TeamCharacter{
+        CharacterID: teamCharacterUpdate.CharacterID,
+        ArtifactID:  teamCharacterUpdate.ArtifactID,
+        TypeSet:     teamCharacterUpdate.TypeSet,
+        Mechanism:   teamCharacterUpdate.Mechanism,
+    }); len(validationErrors) > 0 {
         c.JSON(http.StatusBadRequest, gin.H{"error": true, "message": validationErrors})
         return
     }
 
-    if result := database.DB.Save(&teamCharacter); result.Error != nil {
-        c.JSON(http.StatusInternalServerError, gin.H{"error": true, "message": "Update failed"})
-        return
-    }
-    c.JSON(http.StatusOK, gin.H{"error": false, "message": "Team character updated successfully"})
-}
+    teamCharacter.CharacterID = teamCharacterUpdate.CharacterID
+    teamCharacter.ArtifactID = teamCharacterUpdate.ArtifactID
+    teamCharacter.TypeSet = teamCharacterUpdate.TypeSet
+    teamCharacter.Mechanism = teamCharacterUpdate.Mechanism
+  
 
 func DeleteTeamCharacter(c *gin.Context) {
     id := c.Param("id")
